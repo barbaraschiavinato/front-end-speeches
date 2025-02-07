@@ -17,6 +17,14 @@ extra_javascript:
   - assets/javascripts/extra.js
 plugins:
   - search
+  - git-authors:
+      show_contribution: true
+      sort_authors_by: contribution
+      show_email_address: false
+      exclude: 
+        - include/
+        - checklists/
+        - tags.html
 markdown_extensions:
   - attr_list
   - neoteroi.timeline

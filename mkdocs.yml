@@ -1,0 +1,41 @@
+site_name: NTT Data Front End Speech
+site_author: Barbara Schiavinato
+site_url: https://placeholder/
+use_directory_urls: false
+not_in_nav: |
+  /includes
+nav:
+  - 'Calendar': index.md
+  - 'Q1 2025': 
+    - 'Github Copilot': 'Q1-2025/github-copilot.md'
+    - 'Real-time data': 'Q1-2025/real-time-data.md'
+
+extra_css:
+  - assets/stylesheets/neoteroi-mkdocs.css
+  - assets/stylesheets/extra.css
+extra_javascript:
+  - assets/javascripts/extra.js
+plugins:
+  - search
+markdown_extensions:
+  - attr_list
+  - neoteroi.timeline
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+theme:
+  name: material 
+  logo: assets/logo.png
+  favicon: assets/favicon.ico
+  font:
+    text: Noto Sans
+  features:
+    - navigation.instant
+    - navigation.indexes
+    - navigation.path
+    - toc.follow
+    - search.suggest
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+

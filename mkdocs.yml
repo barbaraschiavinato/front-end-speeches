@@ -1,6 +1,6 @@
 site_name: Front End Speeches
 site_author: Barbara Schiavinato
-site_url: https://placeholder/
+site_url: https://barbaraschiavinato.github.io/front-end-speeches/
 use_directory_urls: false
 not_in_nav: |
   /includes
@@ -20,10 +20,15 @@ plugins:
   - git-authors:
       show_contribution: true
       sort_authors_by: contribution
-      show_email_address: false
+      show_email_address: true
       exclude: 
         - include/
         - checklists/
+        - tags.html
+  - page-to-pdf:
+      disableOnServe: false
+      exclude: 
+        - include/
         - tags.html
 markdown_extensions:
   - attr_list

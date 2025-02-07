@@ -1,0 +1,178 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
+:root, [data-md-color-scheme=default] {
+    --md-accent-fg-color: #0072bc;
+    --md-primary-fg-color: #fff;
+    --md-default-fg-color--light: color: rgb(19, 40, 110);
+    --md-text-font-family: "Noto Sans", sans-serif;
+    --md-header-font-family: "Noto Serif" ,sans-serif;
+    --md-mermaid-font-family: "Noto Serif" ,sans-serif;
+    --md-primary-bg-color: rgb(18, 18, 18);
+    --md-typeset-a-color: #0072bc;
+    --md-footer-bg-color: #070f26;
+    --md-footer-content: '© NTT DATA 2025';
+}
+
+
+body {
+    font-family: var(--md-text-font-family);
+}
+
+.nt-timeline-dot .icon {
+    display: flex;
+}
+
+.md-header--shadow {
+    box-shadow: 0 2px 4px 0px rgba(186,177,182,.15);
+}
+
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+
+}
+
+.md-sidebar {
+    top: 3.4rem;
+}
+
+.md-search__input {
+    color: var(--md-primary-bg-color) !important;
+    background-color: #fff !important;
+    border: 1px solid #e3e3e3;
+}
+
+.md-search__input::placeholder {
+    color: var(--md-primary-bg-color);
+    opacity: .5; 
+}
+
+.glightbox {
+    text-align: center;
+    display: block;
+}
+
+article h1, article h2, article h3, article h4, .header-title {
+    font-family: var(--md-header-font-family);
+}
+
+.md-header__title, .md-nav__title {
+    font-family: var(--md-header-font-family);
+}
+
+@media screen and (max-width: 76.234375em) {
+    .md-sidebar {
+        top: 0;
+    }
+    article h1, article h2 {
+        border-bottom: 2px solid #0072bc;
+    }
+    
+    .md-typeset ol, .md-typeset ul {
+        padding: 0 1rem;
+    }
+    .md-typeset .task-list-item [type=checkbox] {
+        left: -1rem;
+    }
+   
+    
+}
+
+@media print {
+    .md-source-file {
+        display: none;
+    
+    }
+
+    article h1 {
+        border-bottom: 2px solid #0072bc !important;
+        font-family: var(--md-header-font-family);
+    }
+    article h2 {
+        border-bottom: 1px solid #0072bc !important;
+        font-family: var(--md-header-font-family);
+    }
+    article#doc-cover h2 {
+        border-bottom: 0 !important;
+    }
+    .md-typeset {
+        font-size: .8rem !important;
+        font-family: var(--md-text-font-family);
+    }
+
+    #doc-toc li > a, #doc-cover, #doc-toc, #doc-cover h1, .md-typeset h1, #doc-cover h2, .md-typeset h2, .md-typeset h3, .md-typeset h4   {
+        font-family: var(--md-header-font-family);
+    }
+
+    .task-list-item {
+        position: relative;
+    }
+    .task-list-item::before {
+        content: '▢';
+        font-family: Arial,sans-serif;
+        position: absolute;
+        left: -1.3rem;
+        top: 0;
+        font-size: 16pt;
+        line-height: 16pt;
+    }
+    
+    .glightbox {
+        cursor: none !important;
+        pointer-events: none;
+    }
+    .md-typeset img, .glightbox img {
+        max-width: 450px !important;
+    }
+
+    code {
+        font-size: 16pt;
+        white-space : pre-wrap !important;
+        word-break: break-word;
+      }
+    body {
+        -webkit-print-color-adjust: exact;
+    }
+    .md-tags {
+        display: none !important;
+    }
+    .md-typeset ol, .md-typeset ul {
+        padding: 0 1rem;
+    }
+    .md-typeset .task-list-item [type=checkbox] {
+        left: -1rem;
+        display: none;
+    }
+}
+.md-copyright {
+    display: none;
+}
+
+.md-footer-meta__inner::after {
+    content: var(--md-footer-content);
+    font-size: 0.65rem;
+}
+
+@page {
+    size: a4 portrait;
+    margin: 25mm 10mm 25mm 10mm;
+    counter-increment: page;
+    font-family: var(--md-header-font-family);
+    white-space: pre;
+    color: grey;
+    -webkit-print-color-adjust: exact;
+    @bottom-left {
+        content: var(--md-footer-content);
+        font-size: 10px;
+    }
+    /* @top-center {
+        content: string(chapter);
+        font-size: 10px;
+    } */
+    @bottom-right {
+        content: 'Page ' counter(page) ' of ' counter(pages);
+        font-size: 10px;
+    }
+}
+

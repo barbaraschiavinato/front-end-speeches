@@ -40,3 +40,6 @@ jobs:
         with:
           github_token: ${{ secrets.PA_TOKEN }}
           publish_dir: ./site
+          
+      - name: Print deployed URL
+        run: echo "MkDocs is deployed at ${{ steps.deployment.outputs.page_url }}"

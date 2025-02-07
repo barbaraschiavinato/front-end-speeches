@@ -27,3 +27,22 @@
 ### **Additional Notes**
 - **Demo**: A live demo can significantly enhance the talk. Consider setting up a simple chat app that participants can interact with during the session.
 - **Preparation**: Have code snippets and examples ready to share with the audience for reference.
+
+``` mermaid
+sequenceDiagram
+    participant UI as React Component
+    participant WS as WebSocket Server
+    participant Backend as Backend Service (Optional)
+
+    UI->>WS: Open WebSocket Connection (ws://server)
+    WS-->>UI: Connection Established
+
+    UI->>WS: Send Message (JSON Data)
+    WS-->>Backend: Forward to Backend (if needed)
+    Backend-->>WS: Process Message & Respond
+    WS-->>UI: Receive Response (JSON Data)
+
+    UI->>UI: Update State with New Data
+    UI->>WS: Close WebSocket (On Unmount)
+    WS-->>UI: Acknowledgement (Connection Closed)
+```

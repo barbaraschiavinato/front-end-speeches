@@ -35,11 +35,14 @@ jobs:
       - name: Build MkDocs site
         run: mkdocs build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.PA_TOKEN }}
-          publish_dir: ./site
-          
-      - name: Print deployed URL
-        run: echo "MkDocs is deployed at ${{ steps.deployment.outputs.page_url }}"
+          path: './site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

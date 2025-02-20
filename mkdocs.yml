@@ -9,7 +9,8 @@ nav:
   - 'Q1 2025': 
     - 'Github Copilot': 'Q1-2025/github-copilot.md'
     - 'Real-time data': 
-      - 'Introduction': 'Q1-2025/real-time-data/websockets.md'
+      - 'Introduction': 'Q1-2025/real-time-data/index.md'
+      - 'Websockets': 'Q1-2025/real-time-data/websockets.md'
       - 'React SetUp': 'Q1-2025/real-time-data/react-setup.md'
       - 'Alternatives': 'Q1-2025/real-time-data/alternatives.md'
       - 'Performance': 'Q1-2025/real-time-data/performance.md'

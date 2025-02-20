@@ -35,6 +35,17 @@ plugins:
       exclude: 
         - include/
         - tags.html
+  - with-pdf:
+      cover_title: Tech Talks
+      cover_subtitle: Internal document
+      cover_logo: img/logo-big.png
+      author: Barbara Schiavinato
+      copyright: © NTT DATA 2025
+      debug_html: false
+      toc_level: 3
+      exclude_pages: 
+        - tags.html
+      output_path: tech-talk.pdf
 markdown_extensions:
   - attr_list
   - neoteroi.timeline

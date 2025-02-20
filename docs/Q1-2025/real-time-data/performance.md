@@ -61,7 +61,7 @@ const Example = () => {
   );
 };
 
-export default WebSocketDebounceThrottleExample;
+export default Example;
 
 
 ```

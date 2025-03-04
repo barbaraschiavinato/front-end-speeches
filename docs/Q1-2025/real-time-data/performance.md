@@ -138,11 +138,6 @@ Message 4 (800ms) → Ignored
 Message 5 (1000ms) → "Throttled: Message 5"
 ```
 
-## **Keep WebSocket Connections Efficient**
-
-- **Reconnection Logic**: Implement automatic reconnects for when the WebSocket connection drops. Using libraries like `reconnecting-websocket` can help handle reconnections and backoff strategies.
-- **Ping/Pong Mechanism**: To prevent timeouts and keep the connection alive, periodically send ping messages from the client, and handle pong responses from the server.
-
 ## **Optimize State Management**
 
 - React’s state should be optimized to prevent unnecessary re-renders. Avoid updating the state for every single WebSocket message unless it is absolutely necessary. Use techniques like:
@@ -150,6 +145,68 @@ Message 5 (1000ms) → "Throttled: Message 5"
   - **Memoization**: Use `React.memo()` or `useMemo()` to prevent unnecessary re-renders of components that don’t depend on the WebSocket data.
   - **Throttling State Updates**: Avoid updating the state too frequently by batching updates or using throttling techniques.
 
+```js
+import React, { useEffect, useReducer, useRef, useMemo } from 'react';
+
+// Reducer function to manage WebSocket messages efficiently
+const messageReducer = (state: string[], action: { type: string; payload: string[] }) => {
+  switch (action.type) {
+    case "ADD_MESSAGES":
+      return [...state, ...action.payload]; // Batch update messages
+    default:
+      return state;
+  }
+};
+
+const OptimizedWebSocketComponent = () => {
+  const [messages, dispatch] = useReducer(messageReducer, []);
+  const messageBuffer = useRef<string[]>([]); // Buffer to store incoming messages
+  const socketRef = useRef<WebSocket | null>(null);
+
+  useEffect(() => {
+    const socket = new WebSocket('ws://example.com/socket');
+
+    socket.onopen = () => {
+      console.log('WebSocket connected');
+    };
+
+    socket.onmessage = (event) => {
+      messageBuffer.current.push(event.data); // Store messages in buffer
+    };
+
+    // Batch update state every 2 seconds to avoid excessive renders
+    const interval = setInterval(() => {
+      if (messageBuffer.current.length > 0) {
+        dispatch({ type: "ADD_MESSAGES", payload: messageBuffer.current }); // Batch update state
+        messageBuffer.current = []; // Clear buffer
+      }
+    }, 2000);
+
+    socketRef.current = socket;
+
+    return () => {
+      clearInterval(interval);
+      socketRef.current?.close();
+    };
+  }, []);
+
+  // Memoized messages count to prevent unnecessary component re-renders
+  const messageCount = useMemo(() => messages.length, [messages]);
+
+  return (
+    <div>
+      <h3>Optimized WebSocket Messages ({messageCount})</h3>
+      <ul>
+        {messages.map((msg, idx) => (
+          <li key={idx}>{msg}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default OptimizedWebSocketComponent;
+```
 
 ## **Avoid Memory Leaks**
 
@@ -290,3 +347,8 @@ export default function App() {
 ## **Use WebSocket Subprotocols**
 
 - WebSocket supports subprotocols that allow you to define custom protocols for your communication. This can be used to optimize data formats and ensure that only necessary data is transmitted.
+
+## **Keep WebSocket Connections Efficient**
+
+- **Reconnection Logic**: Implement automatic reconnects for when the WebSocket connection drops. Using libraries like `reconnecting-websocket` can help handle reconnections and backoff strategies.
+- **Ping/Pong Mechanism**: To prevent timeouts and keep the connection alive, periodically send ping messages from the client, and handle pong responses from the server.

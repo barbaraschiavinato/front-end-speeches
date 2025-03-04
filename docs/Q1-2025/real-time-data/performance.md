@@ -4,8 +4,11 @@
 
 - WebSockets can send messages continuously, which can overload the app, especially if you're dealing with large amounts of real-time data. To prevent performance degradation:
 
-### Debounce
-Debouncing ensures that an action is only executed after a certain delay from the last time it was triggered. If the event keeps firing, the timer resets.
+  ### Debounce
+  Debouncing ensures that an action is only executed after a certain delay from the last time it was triggered. If the event keeps firing, the timer resets.
+
+  #### Use case
+  **Best for real-time updates:** Ensures data is processed at a steady interval, preventing overload while maintaining responsiveness. Ideal for live sports scores, stock market updates, GPS tracking, and multiplayer game state updates, where immediate data delivery is crucial.
 
     ```ts
     import React, { useState, useEffect, useRef } from 'react';
@@ -58,9 +61,9 @@ Debouncing ensures that an action is only executed after a certain delay from th
     export default DebounceExample;
     ```
 
-    **Debounce scenario:**
+    #### Debounce scenario
 
-    ```plaintext
+    ```
     Message 1 (0ms) - timer starts (500ms delay)
     Message 2 (200ms) - timer resets (500ms delay)
     Message 3 (400ms) - timer resets (500ms delay)
@@ -71,6 +74,9 @@ Debouncing ensures that an action is only executed after a certain delay from th
     ### Throttle
     Throttling ensures that an action only executes once every specified time interval, no matter how many times the event occurs.
 
+    #### Use case
+    **Best for delayed processing**: Waits until activity stops before executing the action, avoiding unnecessary updates. Ideal for live search, auto-save features, form validation, and filtering dashboards, where only the final input matters.
+  
     ```ts
     import React, { useState, useEffect, useRef } from 'react';
 
@@ -122,11 +128,9 @@ Debouncing ensures that an action is only executed after a certain delay from th
 
     ```
 
-    **Throttle scenario:**
+    #### Throttle scenario
 
-
-
-    ```plaintext
+    ```
     Message 1 (0ms) → "Throttled: Message 1"
     Message 2 (200ms) → Ignored
     Message 3 (400ms) → Ignored
@@ -181,6 +185,7 @@ Debouncing ensures that an action is only executed after a certain delay from th
 ## 7. **Batch Updates to the UI**
 
 - For frequent real-time updates, batch updates together to avoid triggering too many re-renders. For instance, if WebSocket messages are related, you can batch them and update the state in a single call, reducing the number of re-renders.
+- For example using useRef instead of useState prevents unnecessary re-renders by storing messages in a buffer and updating the state in batches, improving performance for high-frequency WebSocket updates.
 
 ## 8. **Use Libraries for WebSocket Management**
 

@@ -150,14 +150,6 @@ Message 5 (1000ms) → "Throttled: Message 5"
   - **Memoization**: Use `React.memo()` or `useMemo()` to prevent unnecessary re-renders of components that don’t depend on the WebSocket data.
   - **Throttling State Updates**: Avoid updating the state too frequently by batching updates or using throttling techniques.
 
-## **Efficient Data Handling**
-
-- **Data Transformation**: If the WebSocket server is sending large objects, avoid unnecessary transformations on the client-side. Perform data transformations only when needed.
-- **Data Compression**: Consider using compression (like `gzip` or `Brotli`) for the messages sent over WebSocket, especially if the data size is large.
-
-## **Use WebSocket Subprotocols**
-
-- WebSocket supports subprotocols that allow you to define custom protocols for your communication. This can be used to optimize data formats and ensure that only necessary data is transmitted.
 
 ## **Avoid Memory Leaks**
 
@@ -186,28 +178,6 @@ Message 5 (1000ms) → "Throttled: Message 5"
 
 - For frequent real-time updates, batch updates together to avoid triggering too many re-renders. For instance, if WebSocket messages are related, you can batch them and update the state in a single call, reducing the number of re-renders.
 - For example using useRef instead of useState prevents unnecessary re-renders by storing messages in a buffer and updating the state in batches, improving performance for high-frequency WebSocket updates.
-
-## **Use Libraries for WebSocket Management**
-
-- Consider using libraries like:
-  - **`socket.io`**: For automatic reconnection, message buffering, and other advanced features.
-  - **`reconnecting-websocket`**: For managing WebSocket connections with reconnection logic.
-  - **`use-websocket`**: A React hook library for managing WebSocket connections and automatic clean-up.
-
-## **Limit WebSocket Data Volume**
-
-- If the WebSocket sends too much data, limit the frequency of messages and size of the payloads:
-  - **On the server side**, limit the frequency of broadcasts.
-  - **On the client side**, consider processing only the most relevant messages or applying filters.
-
-## **Avoid Blocking the UI Thread**
-
-- Keep the WebSocket-related code non-blocking. Avoid any heavy computation on the main thread. You can use `setTimeout`, `requestIdleCallback`, or workers to offload heavy tasks, ensuring the UI remains responsive.
-
-## **Error Handling and Monitoring**
-
-- Implement error handling for WebSocket failures and dropped connections. It's important to gracefully handle such errors to ensure a smooth user experience.
-- Use `try/catch` for error management and implement logging to monitor WebSocket performance.
 
 ## **Use Web Workers for Intensive Tasks**
 
@@ -288,3 +258,35 @@ export default function App() {
   );
 }
 ```
+
+## **Use Libraries for WebSocket Management**
+
+- Consider using libraries like:
+  - **`socket.io`**: For automatic reconnection, message buffering, and other advanced features.
+  - **`reconnecting-websocket`**: For managing WebSocket connections with reconnection logic.
+  - **`use-websocket`**: A React hook library for managing WebSocket connections and automatic clean-up.
+
+## **Limit WebSocket Data Volume**
+
+- If the WebSocket sends too much data, limit the frequency of messages and size of the payloads:
+  - **On the server side**, limit the frequency of broadcasts.
+  - **On the client side**, consider processing only the most relevant messages or applying filters.
+
+## **Avoid Blocking the UI Thread**
+
+- Keep the WebSocket-related code non-blocking. Avoid any heavy computation on the main thread. You can use `setTimeout`, `requestIdleCallback`, or workers to offload heavy tasks, ensuring the UI remains responsive.
+
+## **Error Handling and Monitoring**
+
+- Implement error handling for WebSocket failures and dropped connections. It's important to gracefully handle such errors to ensure a smooth user experience.
+- Use `try/catch` for error management and implement logging to monitor WebSocket performance.
+
+
+## **Efficient Data Handling**
+
+- **Data Transformation**: If the WebSocket server is sending large objects, avoid unnecessary transformations on the client-side. Perform data transformations only when needed.
+- **Data Compression**: Consider using compression (like `gzip` or `Brotli`) for the messages sent over WebSocket, especially if the data size is large.
+
+## **Use WebSocket Subprotocols**
+
+- WebSocket supports subprotocols that allow you to define custom protocols for your communication. This can be used to optimize data formats and ensure that only necessary data is transmitted.

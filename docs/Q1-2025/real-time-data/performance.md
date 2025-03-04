@@ -4,10 +4,10 @@
 
 - WebSockets can send messages continuously, which can overload the app, especially if you're dealing with large amounts of real-time data. To prevent performance degradation:
 
-  ### Debounce
+  ### Debounce
   Debouncing ensures that an action is only executed after a certain delay from the last time it was triggered. If the event keeps firing, the timer resets.
 
-  #### Use case
+  #### Use case
   **Best for real-time updates:** Ensures data is processed at a steady interval, preventing overload while maintaining responsiveness. Ideal for live sports scores, stock market updates, GPS tracking, and multiplayer game state updates, where immediate data delivery is crucial.
 
     ```ts
@@ -71,7 +71,7 @@
     Processed at 1200ms → "Debounced: Message 4"
     ```
 
-    ### Throttle
+    ### Throttle
     Throttling ensures that an action only executes once every specified time interval, no matter how many times the event occurs.
 
     #### Use case
